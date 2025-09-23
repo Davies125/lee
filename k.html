@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lee Timber Yard - Inventory Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6580 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #ff9900;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ff9900;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .stat-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .stat-box p {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #4a6580;
+            box-shadow: 0 0 0 3px rgba(74, 101, 128, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .filter-box {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+            min-width: 180px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background-color: #4a6580;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a556e;
+        }
+        
+        .btn-success {
+            background-color: #2a7d2e;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #216b25;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-edit {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .btn-edit:hover {
+            background-color: #bbdefb;
+        }
+        
+        .btn-delete {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .btn-delete:hover {
+            background-color: #ffcdd2;
+        }
+        
+        .inventory-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a6580 0%, #2c3e50 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .department {
+            background-color: #e8f4fc;
+            color: #2c6aa3;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .qty {
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+        
+        .in-stock {
+            background-color: #e7f6e9;
+            color: #2a7d2e;
+        }
+        
+        .low-stock {
+            background-color: #fef6e0;
+            color: #c17c0c;
+        }
+        
+        .out-of-stock {
+            background-color: #feebee;
+            color: #d32f2f;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .pagination button {
+            padding: 10px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pagination button:hover {
+            background-color: #4a6580;
+            color: white;
+        }
+        
+        .pagination button.active {
+            background-color: #4a6580;
+            color: white;
+            border-color: #4a6580;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: #2c3e50;
+        }
+        
+        .close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4a6580;
+            box-shadow: 0 0 0 3px rgba(74, 101, 128, 0.2);
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Import/Export Styles */
+        .csv-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+        
+        .csv-section h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .csv-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .filter-box {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            select {
+                flex: 1;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .csv-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-warehouse"></i>
+                <h1>Lee <span>Timber Yard</span></h1>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>Total Items</h3>
+                    <p id="totalItems">335</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Total Value</h3>
+                    <p id="totalValue">KSh 2,458,900</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Departments</h3>
+                    <p id="totalDepartments">15</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="csv-section">
+            <h3>Data Management</h3>
+            <div class="csv-actions">
+                <button id="exportCSV" class="btn btn-secondary">
+                    <i class="fas fa-file-export"></i> Export to CSV
+                </button>
+                <button id="importCSV" class="btn btn-secondary">
+                    <i class="fas fa-file-import"></i> Import from CSV
+                </button>
+                <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by item name, number, or department...">
+            </div>
+            <div class="filter-box">
+                <select id="departmentFilter">
+                    <option value="">All Departments</option>
+                    <option value="PVC">PVC</option>
+                    <option value="Cornices">Cornices</option>
+                    <option value="Gypsum">Gypsum</option>
+                    <option value="Boards">Boards</option>
+                    <option value="Paint (Crown)">Paint (Crown)</option>
+                    <option value="Crown">Crown</option>
+                    <option value="Paint (Solai)">Paint (Solai)</option>
+                    <option value="Solai">Solai</option>
+                    <option value="NC (Solai)">NC (Solai)</option>
+                    <option value="Seweco">Seweco</option>
+                    <option value="United">United</option>
+                    <option value="Duracoat">Duracoat</option>
+                    <option value="Basco">Basco</option>
+                    <option value="Paint (United)">Paint (United)</option>
+                    <option value="Crystal">Crystal</option>
+                    <option value="Curtain rod">Curtain rod</option>
+                    <option value="Hinges">Hinges</option>
+                    <option value="Bathroom Accessories">Bathroom Accessories</option>
+                    <option value="Kitchen Accessories">Kitchen Accessories</option>
+                    <option value="Brackets">Brackets</option>
+                    <option value="Pipe">Pipe</option>
+                    <option value="Glue">Glue</option>
+                    <option value="Shower">Shower</option>
+                    <option value="Rubber">Rubber</option>
+                    <option value="Testor">Testor</option>
+                    <option value="Pliers">Pliers</option>
+                </select>
+                <select id="stockFilter">
+                    <option value="">All Stock Status</option>
+                    <option value="in-stock">In Stock</option>
+                    <option value="low-stock">Low Stock</option>
+                    <option value="out-of-stock">Out of Stock</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <button id="addItemBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add New Item
+                </button>
+            </div>
+        </div>
+
+        <div class="inventory-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Number</th>
+                        <th>Item Name</th>
+                        <th>Department</th>
+                        <th>Selling Price (KSh)</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <!-- Table content will be generated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button id="prevPage"><i class="fas fa-chevron-left"></i> Previous</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Lee Timber Yard Inventory System &copy; 2025. All rights reserved.</p>
+    </footer>
+
+    <!-- Add/Edit Item Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Item</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="itemForm">
+                    <input type="hidden" id="itemId">
+                    <div class="form-group">
+                        <label for="itemNumber">Item Number</label>
+                        <input type="text" id="itemNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department">
+                            <option value="">Select Department</option>
+                            <option value="PVC">PVC</option>
+                            <option value="Cornices">Cornices</option>
+                            <option value="Gypsum">Gypsum</option>
+                            <option value="Boards">Boards</option>
+                            <option value="Paint (Crown)">Paint (Crown)</option>
+                            <option value="Crown">Crown</option>
+                            <option value="Paint (Solai)">Paint (Solai)</option>
+                            <option value="Solai">Solai</option>
+                            <option value="NC (Solai)">NC (Solai)</option>
+                            <option value="Seweco">Seweco</option>
+                            <option value="United">United</option>
+                            <option value="Duracoat">Duracoat</option>
+                            <option value="Basco">Basco</option>
+                            <option value="Paint (United)">Paint (United)</option>
+                            <option value="Crystal">Crystal</option>
+                            <option value="Curtain rod">Curtain rod</option>
+                            <option value="Hinges">Hinges</option>
+                            <option value="Bathroom Accessories">Bathroom Accessories</option>
+                            <option value="Kitchen Accessories">Kitchen Accessories</option>
+                            <option value="Brackets">Brackets</option>
+                            <option value="Pipe">Pipe</option>
+                            <option value="Glue">Glue</option>
+                            <option value="Shower">Shower</option>
+                            <option value="Rubber">Rubber</option>
+                            <option value="Testor">Testor</option>
+                            <option value="Pliers">Pliers</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Selling Price (KSh)</label>
+                        <input type="number" id="price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" min="0" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveItemBtn">Save Item</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inventory data from the Excel sheet
+        let inventoryData = [
+            { itemNumber: '', itemName: '901 PVC', department: 'PVC', price: 4500, qty: 3 },
+            { itemNumber: '2', itemName: '902 PVC', department: 'PVC', price: 4500, qty: 9 },
+            { itemNumber: '3', itemName: '903 PVC', department: 'PVC', price: 4500, qty: 8 },
+            // ... (all the other items from your original data)
+            { itemNumber: '335', itemName: '', department: '', price: null, qty: null }
+        ];
+
+        // Utility functions
+        function formatPrice(price) {
+            if (price === null || price === undefined || isNaN(price)) return 'N/A';
+            return 'KSh ' + Number(price).toLocaleString();
+        }
+
+        function getStockStatus(qty) {
+            if (qty === null || qty === undefined || qty === 0) return 'out-of-stock';
+            if (qty <= 5) return 'low-stock';
+            return 'in-stock';
+        }
+
+        function getStockText(qty) {
+            if (qty === null || qty === undefined) return 'Out of Stock';
+            if (qty === 0) return 'Out of Stock';
+            if (qty <= 5) return `Low Stock (${qty})`;
+            return `In Stock (${qty})`;
+        }
+
+        // Calculate total value of inventory
+        function calculateTotalValue(items) {
+            return items.reduce((total, item) => {
+                const price = Number(item.price) || 0;
+                const qty = Number(item.qty) || 0;
+                return total + (price * qty);
+            }, 0);
+        }
+
+        // Count unique departments
+        function countDepartments(items) {
+            const departments = new Set();
+            items.forEach(item => {
+                if (item.department && item.department.trim() !== '') {
+                    departments.add(item.department);
+                }
+            });
+            return departments.size;
+        }
+
+        // Render inventory table
+        function renderInventory(items) {
+            const tbody = document.getElementById('inventoryBody');
+            tbody.innerHTML = '';
+            
+            if (items.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            <h3>No items found</h3>
+                            <p>Try adjusting your search terms or filters</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            items.forEach(item => {
+                const row = document.createElement('tr');
+                
+                const stockStatus = getStockStatus(item.qty);
+                const stockText = getStockText(item.qty);
+                
+                row.innerHTML = `
+                    <td>${item.itemNumber || 'N/A'}</td>
+                    <td><span class="item-name">${item.itemName || 'Unnamed Item'}</span></td>
+                    <td><span class="department">${item.department || 'General'}</span></td>
+                    <td><span class="price">${formatPrice(item.price)}</span></td>
+                    <td><span class="qty ${stockStatus}">${stockText}</span></td>
+                    <td class="actions">
+                        <button class="btn btn-edit" data-id="${item.itemNumber}"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn btn-delete" data-id="${item.itemNumber}"><i class="fas fa-trash"></i> Delete</button>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Update stats
+            document.getElementById('totalItems').textContent = items.length;
+            document.getElementById('totalValue').textContent = formatPrice(calculateTotalValue(items));
+            document.getElementById('totalDepartments').textContent = countDepartments(items);
+            
+            // Add event listeners to edit and delete buttons
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemNumber = e.target.closest('.btn-edit').getAttribute('data-id');
+                    editItem(itemNumber);
+                });
+            });
+            
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemNumber = e.target.closest('.btn-delete').getAttribute('data-id');
+                    deleteItem(itemNumber);
+                });
+            });
+        }
+
+        // Filter inventory based on search and filters
+        function filterInventory() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const departmentFilter = document.getElementById('departmentFilter').value;
+            const stockFilter = document.getElementById('stockFilter').value;
+            
+            const filteredItems = inventoryData.filter(item => {
+                // Department filter
+                if (departmentFilter && item.department !== departmentFilter) {
+                    return false;
+                }
+                
+                // Stock status filter
+                if (stockFilter) {
+                    const status = getStockStatus(item.qty);
+                    if (status !== stockFilter) {
+                        return false;
+                    }
+                }
+                
+                // Search text
+                if (searchText) {
+                    const searchableText = `${item.itemNumber} ${item.itemName} ${item.department}`.toLowerCase();
+                    if (!searchableText.includes(searchText)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            renderInventory(filteredItems);
+        }
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('itemModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('itemModal').style.display = 'none';
+            document.getElementById('itemForm').reset();
+            document.getElementById('itemId').value = '';
+            document.getElementById('modalTitle').textContent = 'Add New Item';
+        }
+        
+        function editItem(itemNumber) {
+            const item = inventoryData.find(item => item.itemNumber === itemNumber);
+            if (item) {
+                document.getElementById('modalTitle').textContent = 'Edit Item';
+                document.getElementById('itemId').value = item.itemNumber;
+                document.getElementById('itemNumber').value = item.itemNumber;
+                document.getElementById('itemName').value = item.itemName;
+                document.getElementById('department').value = item.department;
+                document.getElementById('price').value = item.price;
+                document.getElementById('quantity').value = item.qty;
+                openModal();
+            }
+        }
+        
+        function deleteItem(itemNumber) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                inventoryData = inventoryData.filter(item => item.itemNumber !== itemNumber);
+                renderInventory(inventoryData);
+                saveToLocalStorage();
+            }
+        }
+        
+        function saveItem() {
+            const itemId = document.getElementById('itemId').value;
+            const itemNumber = document.getElementById('itemNumber').value;
+            const itemName = document.getElementById('itemName').value;
+            const department = document.getElementById('department').value;
+            const price = parseFloat(document.getElementById('price').value);
+            const qty = parseInt(document.getElementById('quantity').value);
+            
+            if (itemId) {
+                // Editing existing item
+                const index = inventoryData.findIndex(item => item.itemNumber === itemId);
+                if (index !== -1) {
+                    inventoryData[index] = { itemNumber, itemName, department, price, qty };
+                }
+            } else {
+                // Adding new item
+                // Check if item number already exists
+                if (inventoryData.some(item => item.itemNumber === itemNumber)) {
+                    alert('Item number already exists. Please use a unique item number.');
+                    return;
+                }
+                inventoryData.push({ itemNumber, itemName, department, price, qty });
+            }
+            
+            renderInventory(inventoryData);
+            closeModal();
+            saveToLocalStorage();
+        }
+        
+        // CSV Export function
+        function exportToCSV() {
+            // Create CSV content
+            let csvContent = "Item Number,Item Name,Department,Price,Quantity\n";
+            
+            inventoryData.forEach(item => {
+                csvContent += `"${item.itemNumber || ''}","${item.itemName || ''}","${item.department || ''}",${item.price || ''},${item.qty || ''}\n`;
+            });
+            
+            // Create download link
+            const encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "lee_timber_yard_inventory.csv");
+            document.body.appendChild(link);
+            
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // CSV Import function
+        function importFromCSV(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const csvData = e.target.result;
+                const lines = csvData.split('\n');
+                const newInventory = [];
+                
+                // Skip header line and process each line
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line) {
+                        // Handle quoted fields that might contain commas
+                        const fields = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                        
+                        if (fields.length >= 5) {
+                            // Remove quotes from fields
+                            const itemNumber = fields[0].replace(/^"|"$/g, '');
+                            const itemName = fields[1].replace(/^"|"$/g, '');
+                            const department = fields[2].replace(/^"|"$/g, '');
+                            const price = fields[3] ? parseFloat(fields[3]) : null;
+                            const qty = fields[4] ? parseInt(fields[4]) : null;
+                            
+                            newInventory.push({ itemNumber, itemName, department, price, qty });
+                        }
+                    }
+                }
+                
+                if (newInventory.length > 0) {
+                    if (confirm(`Import ${newInventory.length} items? This will replace your current inventory.`)) {
+                        inventoryData = newInventory;
+                        renderInventory(inventoryData);
+                        saveToLocalStorage();
+                        alert('Inventory imported successfully!');
+                    }
+                } else {
+                    alert('No valid data found in the CSV file.');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        // Local storage functions
+        function saveToLocalStorage() {
+            localStorage.setItem('inventoryData', JSON.stringify(inventoryData));
+        }
+        
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('inventoryData');
+            if (savedData) {
+                inventoryData = JSON.parse(savedData);
+            }
+        }
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load data from local storage
+            loadFromLocalStorage();
+            
+            // Initial render
+            renderInventory(inventoryData);
+            
+            // Event listeners
+            document.getElementById('searchInput').addEventListener('input', filterInventory);
+            document.getElementById('departmentFilter').addEventListener('change', filterInventory);
+            document.getElementById('stockFilter').addEventListener('change', filterInventory);
+            
+            // Modal event listeners
+            document.getElementById('addItemBtn').addEventListener('click', () => {
+                document.getElementById('itemForm').reset();
+                document.getElementById('itemId').value = '';
+                document.getElementById('modalTitle').textContent = 'Add New Item';
+                openModal();
+            });
+            
+            document.querySelector('.close').addEventListener('click', closeModal);
+            document.getElementById('cancelBtn').addEventListener('click', closeModal);
+            document.getElementById('saveItemBtn').addEventListener('click', saveItem);
+            
+            // CSV event listeners
+            document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+            document.getElementById('importCSV').addEventListener('click', () => {
+                document.getElementById('csvFileInput').click();
+            });
+            
+            document.getElementById('csvFileInput').addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    importFromCSV(e.target.files[0]);
+                }
+            });
+            
+            // Add keyboard shortcut for search
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('itemModal')) {
+                    closeModal();
+                }
+            });
+            
+            console.log('Lee Timber Yard inventory system loaded successfully!');
+            console.log(`Total items in inventory: ${inventoryData.length}`);
+        });
+    </script>
+</body>
+</html>

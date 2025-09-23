@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lee Timber Yard - Inventory Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6580 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #ff9900;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ff9900;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .stat-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .stat-box p {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff9900;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #4a6580;
+            box-shadow: 0 0 0 3px rgba(74, 101, 128, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .filter-box {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+            min-width: 180px;
+        }
+        
+        .inventory-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a6580 0%, #2c3e50 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .department {
+            background-color: #e8f4fc;
+            color: #2c6aa3;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .qty {
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+        
+        .in-stock {
+            background-color: #e7f6e9;
+            color: #2a7d2e;
+        }
+        
+        .low-stock {
+            background-color: #fef6e0;
+            color: #c17c0c;
+        }
+        
+        .out-of-stock {
+            background-color: #feebee;
+            color: #d32f2f;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-edit {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .btn-edit:hover {
+            background-color: #bbdefb;
+        }
+        
+        .btn-delete {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .btn-delete:hover {
+            background-color: #ffcdd2;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .pagination button {
+            padding: 10px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pagination button:hover {
+            background-color: #4a6580;
+            color: white;
+        }
+        
+        .pagination button.active {
+            background-color: #4a6580;
+            color: white;
+            border-color: #4a6580;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .filter-box {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            select {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-warehouse"></i>
+                <h1>Lee <span>Timber Yard</span></h1>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>Total Items</h3>
+                    <p id="totalItems">335</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Total Value</h3>
+                    <p id="totalValue">KSh 2,458,900</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Departments</h3>
+                    <p id="totalDepartments">15</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by item name, number, or department...">
+            </div>
+            <div class="filter-box">
+                <select id="departmentFilter">
+                    <option value="">All Departments</option>
+                    <option value="PVC">PVC</option>
+                    <option value="Cornices">Cornices</option>
+                    <option value="Gypsum">Gypsum</option>
+                    <option value="Boards">Boards</option>
+                    <option value="Paint (Crown)">Paint (Crown)</option>
+                    <option value="Crown">Crown</option>
+                    <option value="Paint (Solai)">Paint (Solai)</option>
+                    <option value="Solai">Solai</option>
+                    <option value="NC (Solai)">NC (Solai)</option>
+                    <option value="Seweco">Seweco</option>
+                    <option value="United">United</option>
+                    <option value="Duracoat">Duracoat</option>
+                    <option value="Basco">Basco</option>
+                    <option value="Paint (United)">Paint (United)</option>
+                    <option value="Crystal">Crystal</option>
+                    <option value="Curtain rod">Curtain rod</option>
+                    <option value="Hinges">Hinges</option>
+                    <option value="Bathroom Accessories">Bathroom Accessories</option>
+                    <option value="Kitchen Accessories">Kitchen Accessories</option>
+                    <option value="Brackets">Brackets</option>
+                    <option value="Pipe">Pipe</option>
+                    <option value="Glue">Glue</option>
+                    <option value="Shower">Shower</option>
+                    <option value="Rubber">Rubber</option>
+                    <option value="Testor">Testor</option>
+                    <option value="Pliers">Pliers</option>
+                </select>
+                <select id="stockFilter">
+                    <option value="">All Stock Status</option>
+                    <option value="in-stock">In Stock</option>
+                    <option value="low-stock">Low Stock</option>
+                    <option value="out-of-stock">Out of Stock</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="inventory-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Number</th>
+                        <th>Item Name</th>
+                        <th>Department</th>
+                        <th>Selling Price (KSh)</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <!-- Table content will be generated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button id="prevPage"><i class="fas fa-chevron-left"></i> Previous</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Lee Timber Yard Inventory System &copy; 2023. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Inventory data from the Excel sheet
+        const inventoryData = [
+            { itemNumber: '', itemName: '901 PVC', department: 'PVC', price: 4500, qty: 3 },
+            { itemNumber: '2', itemName: '902 PVC', department: 'PVC', price: 4500, qty: 9 },
+            { itemNumber: '3', itemName: '903 PVC', department: 'PVC', price: 4500, qty: 8 },
+            { itemNumber: '4', itemName: '904 PVC', department: 'PVC', price: 4500, qty: 16 },
+            { itemNumber: '5', itemName: '904+ PVC', department: 'PVC', price: 4500, qty: 4 },
+            { itemNumber: '6', itemName: '906 PVC', department: 'PVC', price: 4500, qty: 6 },
+            { itemNumber: '7', itemName: '007 PVC', department: 'PVC', price: 2500, qty: 1 },
+            { itemNumber: '8', itemName: '901 Cornices', department: 'Cornices', price: 300, qty: null },
+            { itemNumber: '9', itemName: '902 Cornices', department: 'Cornices', price: 300, qty: 9 },
+            { itemNumber: '10', itemName: '903 Cornices', department: 'Cornices', price: 300, qty: 8 },
+            { itemNumber: '11', itemName: '904 Cornices', department: 'Cornices', price: 300, qty: 29 },
+            { itemNumber: '12', itemName: '904+ Cornices', department: 'Cornices', price: 300, qty: 32 },
+            { itemNumber: '13', itemName: '007 Cornices', department: 'Cornices', price: 200, qty: 8 },
+            { itemNumber: '14', itemName: '906 Cornices', department: 'Cornices', price: 300, qty: null },
+            { itemNumber: '15', itemName: 'Gypsum Board', department: 'Gypsum', price: 840, qty: 205 },
+            { itemNumber: '16', itemName: 'Channels', department: 'Gypsum', price: 260, qty: null },
+            { itemNumber: '17', itemName: 'Studs', department: 'Gypsum', price: 260, qty: null },
+            { itemNumber: '18', itemName: 'Cornice', department: 'Gypsum', price: 140, qty: null },
+            { itemNumber: '19', itemName: 'Fibre Cornice', department: 'Gypsum', price: 700, qty: null },
+            { itemNumber: '20', itemName: 'Gypsum Screws', department: 'Gypsum', price: 800, qty: null },
+            { itemNumber: '21', itemName: 'Fibre Tape', department: 'Gypsum', price: 450, qty: null },
+            { itemNumber: '22', itemName: 'Corner Tape', department: 'Gypsum', price: 1200, qty: null },
+            { itemNumber: '23', itemName: 'Gypsum reject', department: 'Gypsum', price: 500, qty: null },
+            { itemNumber: '24', itemName: 'Marine Board', department: 'Boards', price: 3000, qty: null },
+            { itemNumber: '25', itemName: 'Block Board', department: 'Boards', price: 3200, qty: null },
+            { itemNumber: '26', itemName: 'Ply Wood', department: 'Boards', price: 600, qty: null },
+            { itemNumber: '27', itemName: '6 Ply', department: 'Boards', price: 1200, qty: null },
+            { itemNumber: '28', itemName: '9 Ply', department: 'Boards', price: 1750, qty: null },
+            { itemNumber: '29', itemName: 'Laminated Ply', department: 'Boards', price: 1500, qty: null },
+            { itemNumber: '30', itemName: 'Ceiling board Plain', department: 'Boards', price: 1100, qty: null },
+            { itemNumber: '31', itemName: 'Ceiling board design', department: 'Boards', price: 1100, qty: null },
+            { itemNumber: '32', itemName: 'White MDF', department: 'Boards', price: 3500, qty: null },
+            { itemNumber: '33', itemName: 'Cherry MDF', department: 'Boards', price: 3500, qty: null },
+            { itemNumber: '34', itemName: 'Beech MDF', department: 'Boards', price: 3500, qty: null },
+            { itemNumber: '35', itemName: 'Coimbra', department: 'Boards', price: 3600, qty: null },
+            { itemNumber: '36', itemName: 'Amaya', department: 'Boards', price: 3600, qty: null },
+            { itemNumber: '37', itemName: 'A. wallnut MDF', department: 'Boards', price: 3600, qty: null },
+            { itemNumber: '38', itemName: 'K 129 MDF', department: 'Boards', price: 3500, qty: null },
+            { itemNumber: '39', itemName: 'Versatile Oak MDF', department: 'Boards', price: 3500, qty: null },
+            { itemNumber: '40', itemName: 'Chipboard White', department: 'Boards', price: 3000, qty: null },
+            { itemNumber: '41', itemName: 'Chipboard Cherry', department: 'Boards', price: 3000, qty: null },
+            { itemNumber: '42', itemName: 'Chipboard Coimbra', department: 'Boards', price: 3100, qty: null },
+            { itemNumber: '43', itemName: '20 L Covermat', department: 'Paint (Crown)', price: 4400, qty: null },
+            { itemNumber: '44', itemName: '4 L Covermat', department: 'Crown', price: 1350, qty: null },
+            { itemNumber: '45', itemName: '20 L Silk Crown', department: 'Crown', price: 12300, qty: null },
+            { itemNumber: '46', itemName: '4 L Silk', department: 'Crown', price: 2600, qty: null },
+            { itemNumber: '47', itemName: '4 L S/gloss Crown Black', department: 'Crown', price: 2700, qty: null },
+            { itemNumber: '48', itemName: '4 L S/gloss Crown White', department: 'Crown', price: 2600, qty: null },
+            { itemNumber: '49', itemName: '4 L Clear Varnish', department: 'Paint (Solai)', price: 1700, qty: null },
+            { itemNumber: '50', itemName: '1 L Clear Varnish', department: 'Solai', price: 600, qty: null },
+            { itemNumber: '51', itemName: '4 L Mahogany Varnish', department: 'Solai', price: 1700, qty: null },
+            { itemNumber: '52', itemName: '1 L Mahogany Varnish', department: 'Solai', price: 600, qty: null },
+            { itemNumber: '53', itemName: '4 L Sanding Sealer', department: 'Solai', price: 2000, qty: null },
+            { itemNumber: '54', itemName: '1 L Sanding Sealer', department: 'Solai', price: 850, qty: null },
+            { itemNumber: '55', itemName: '1/2 Sanding Sealer', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '56', itemName: '1/4 Sanding Sealer', department: 'Solai', price: 250, qty: null },
+            { itemNumber: '57', itemName: 'NC Cherry 1 L', department: 'NC (Solai)', price: 500, qty: null },
+            { itemNumber: '58', itemName: 'NC Cherry 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '59', itemName: 'NC Sapeli 1 L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '60', itemName: 'NC Sapeli 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '61', itemName: 'NC A. Wallnut 1 L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '62', itemName: 'NC A. Wallnut 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '63', itemName: 'NC Peach 1 L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '64', itemName: 'NC Peach 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '65', itemName: 'NC White 1  L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '66', itemName: 'NC White 1/2  L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '67', itemName: 'NC Salzag 1 L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '68', itemName: 'NC Salzag 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '69', itemName: 'Etmo 1 L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '70', itemName: 'Etmo 1/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '71', itemName: 'Coimbra I L', department: 'Solai', price: 500, qty: null },
+            { itemNumber: '72', itemName: 'Coimbra I/2 L', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '73', itemName: '5 L Thinner', department: 'Solai', price: 1500, qty: null },
+            { itemNumber: '74', itemName: '1 L Thinner', department: 'Solai', price: 350, qty: null },
+            { itemNumber: '75', itemName: '5 L Turpentine', department: 'Solai', price: 1200, qty: null },
+            { itemNumber: '76', itemName: '1 L Turpentine', department: 'Solai', price: 250, qty: null },
+            { itemNumber: '77', itemName: '5 L White Spirit', department: 'Solai', price: 1300, qty: null },
+            { itemNumber: '78', itemName: '1 L White Spirit', department: 'Solai', price: 300, qty: null },
+            { itemNumber: '79', itemName: '500 ml Thinner', department: '', price: 200, qty: null },
+            { itemNumber: '80', itemName: '500 ml Turpentine', department: '', price: 200, qty: null },
+            { itemNumber: '81', itemName: '4 L Seweco sanding Sealer', department: 'Seweco', price: 2200, qty: null },
+            { itemNumber: '82', itemName: '4 L Plastic Emulsion White', department: 'United', price: 700, qty: null },
+            { itemNumber: '83', itemName: '4 L plastic Emulsion soft white', department: 'United', price: 700, qty: null },
+            { itemNumber: '84', itemName: '4 L Plastic Emulsion cream', department: 'United', price: 700, qty: null },
+            { itemNumber: '85', itemName: '1 L Plastic Emulsion White', department: 'United', price: 250, qty: null },
+            { itemNumber: '86', itemName: '1 L Plastic Emulsion soft white', department: 'United', price: 250, qty: null },
+            { itemNumber: '87', itemName: '1 L Plastic Emulsion Cream', department: 'United', price: 250, qty: null },
+            { itemNumber: '88', itemName: '5 L white Spirit', department: 'United', price: 1000, qty: null },
+            { itemNumber: '89', itemName: '1 L S/gloss White', department: 'United', price: 1000, qty: null },
+            { itemNumber: '90', itemName: '1 L S/gloss Black', department: 'United', price: 1000, qty: null },
+            { itemNumber: '91', itemName: 'Primer Crown', department: 'United', price: 2700, qty: null },
+            { itemNumber: '92', itemName: 'Clear Varnish Crown', department: 'United', price: 2200, qty: null },
+            { itemNumber: '93', itemName: '20L Superfast', department: 'Duracoat', price: 4350, qty: null },
+            { itemNumber: '94', itemName: '4L Superfast', department: 'Duracoat', price: 1300, qty: null },
+            { itemNumber: '95', itemName: '20L Silk Dura', department: 'Duracoat', price: 11700, qty: null },
+            { itemNumber: '96', itemName: '4L Silk Dura', department: 'Duracoat', price: 2500, qty: null },
+            { itemNumber: '97', itemName: '4L S/gloss Dura Black', department: 'Duracoat', price: 2600, qty: null },
+            { itemNumber: '98', itemName: '4L S/gloss Dura White', department: 'Duracoat', price: 2550, qty: null },
+            { itemNumber: '99', itemName: '1L S/gloss Black', department: 'Duracoat', price: 950, qty: null },
+            { itemNumber: '100', itemName: '1 S/gloss Dura White', department: 'Duracoat', price: 950, qty: null },
+            { itemNumber: '101', itemName: 'Prime Duracoat', department: 'Duracoat', price: 3000, qty: null },
+            { itemNumber: '102', itemName: '20L Basco', department: 'Basco', price: 2300, qty: null },
+            { itemNumber: '103', itemName: '4L Basco', department: 'Basco', price: 600, qty: null },
+            { itemNumber: '104', itemName: '4L Gloss Enamel Gun Metal', department: 'Paint (United)', price: 900, qty: null },
+            { itemNumber: '105', itemName: '4L Gloss Enamel Metal Grey', department: 'United', price: 900, qty: null },
+            { itemNumber: '106', itemName: '4L Gloss Enamel White', department: 'United', price: 900, qty: null },
+            { itemNumber: '107', itemName: '4L Gloss Enamel Black', department: 'United', price: 900, qty: null },
+            { itemNumber: '108', itemName: '1L Gloss Enamel Gun Metal', department: 'United', price: 350, qty: null },
+            { itemNumber: '109', itemName: '1L Gloss Enamel Metal Grey', department: 'United', price: 350, qty: null },
+            { itemNumber: '110', itemName: '1L Gloss Enamel Black', department: 'United', price: 350, qty: null },
+            { itemNumber: '111', itemName: '1L Gloss Enamel White', department: 'United', price: 350, qty: null },
+            { itemNumber: '112', itemName: '4L United Silk Vinyl White', department: 'United', price: 1500, qty: null },
+            { itemNumber: '113', itemName: '4L United Silk Vinyl Lolipop', department: 'United', price: 1500, qty: null },
+            { itemNumber: '114', itemName: '4L United Silk Vinyl Tango', department: 'United', price: 1500, qty: null },
+            { itemNumber: '115', itemName: '4L United Silk Vinyl soft white', department: 'United', price: 1500, qty: null },
+            { itemNumber: '116', itemName: '20L Plastic Emulsion White', department: 'United', price: 1800, qty: null },
+            { itemNumber: '117', itemName: '20L Plastic Emulsion soft white', department: 'United', price: 1800, qty: null },
+            { itemNumber: '118', itemName: '20L Plastic Emulsion Cream', department: 'United', price: 1800, qty: null },
+            { itemNumber: '119', itemName: 'Clear Varnish 1L', department: 'Crystal', price: 250, qty: null },
+            { itemNumber: '120', itemName: 'Clear Varnish 1/2 L', department: 'Crystal', price: 150, qty: null },
+            { itemNumber: '121', itemName: 'Mahogany Varnish 1L', department: 'Crystal', price: 250, qty: null },
+            { itemNumber: '122', itemName: 'Mahogany Varnish 1/2L', department: 'Crystal', price: 150, qty: null },
+            { itemNumber: '123', itemName: 'Light Oak 1L', department: 'Crystal', price: 250, qty: null },
+            { itemNumber: '124', itemName: 'Light Oak 1/2L', department: 'Crystal', price: 150, qty: null },
+            { itemNumber: '125', itemName: 'Dark Oak 1L', department: 'Crystal', price: 250, qty: null },
+            { itemNumber: '126', itemName: 'Dark Oak 1/2L', department: 'Crystal', price: 150, qty: null },
+            { itemNumber: '127', itemName: '1L NC Clear', department: 'Crystal', price: 250, qty: null },
+            { itemNumber: '128', itemName: '1/2L NC Clear', department: 'Crystal', price: 150, qty: null },
+            { itemNumber: '129', itemName: 'Curtain rods 2M Gold', department: 'Curtain rod', price: 1200, qty: null },
+            { itemNumber: '130', itemName: 'Curtain rods 2M Black', department: 'Curtain rod', price: 1200, qty: null },
+            { itemNumber: '131', itemName: 'Curtain rods 2M Silver', department: 'Curtain rod', price: 1200, qty: null },
+            { itemNumber: '132', itemName: 'Curtain rods 2M Copper', department: 'Curtain rod', price: 1200, qty: null },
+            { itemNumber: '133', itemName: 'Curtain rods 3M Gold', department: 'Curtain rod', price: 1500, qty: null },
+            { itemNumber: '134', itemName: 'Curtain rods 3M Black', department: 'Curtain rod', price: 1500, qty: null },
+            { itemNumber: '135', itemName: 'Curtain rods 3M Silver', department: 'Curtain rod', price: 1500, qty: null },
+            { itemNumber: '136', itemName: 'Curtain rods 3M Copper', department: 'Curtain rod', price: 1500, qty: null },
+            { itemNumber: '137', itemName: 'Curtain rods 1M Gold', department: 'Curtain rod', price: 950, qty: null },
+            { itemNumber: '138', itemName: 'Curtain rods 1M Black', department: 'Curtain rod', price: 950, qty: null },
+            { itemNumber: '139', itemName: 'Curtain rods 1M Silver', department: 'Curtain rod', price: 950, qty: null },
+            { itemNumber: '140', itemName: 'Curtain rods 1M Copper', department: 'Curtain rod', price: 950, qty: null },
+            { itemNumber: '141', itemName: 'Oxford Gold', department: 'Hinges', price: 200, qty: null },
+            { itemNumber: '142', itemName: 'Oxford Silver', department: 'Hinges', price: 200, qty: null },
+            { itemNumber: '143', itemName: 'Soap Dish Small', department: 'Bathroom Accessories', price: 400, qty: null },
+            { itemNumber: '144', itemName: 'Soap Dish Big', department: 'Bathroom Accessories', price: 700, qty: null },
+            { itemNumber: '145', itemName: 'Soap Dish Plastic', department: 'Bathroom Accessories', price: 250, qty: null },
+            { itemNumber: '146', itemName: 'Tissue Holder (White)', department: 'Bathroom Accessories', price: 500, qty: null },
+            { itemNumber: '147', itemName: 'Tissue Holder (ring)', department: 'Bathroom Accessories', price: 500, qty: null },
+            { itemNumber: '148', itemName: 'Tissue Holder (Big)', department: 'Bathroom Accessories', price: 1000, qty: null },
+            { itemNumber: '149', itemName: 'Tissue Holder (Small) A', department: 'Bathroom Accessories', price: 500, qty: null },
+            { itemNumber: '150', itemName: 'Tissue Holder (Small) B', department: 'Bathroom Accessories', price: 500, qty: null },
+            { itemNumber: '151', itemName: 'Corner Unit', department: 'Kitchen Accessories', price: 1000, qty: null },
+            { itemNumber: '152', itemName: 'Kitchen Towel Holder', department: 'Kitchen Accessories', price: 900, qty: null },
+            { itemNumber: '153', itemName: 'Toothbrush Holder normal', department: 'Kitchen Accessories', price: null, qty: null },
+            { itemNumber: '154', itemName: 'Chrome Brackets 1\'', department: 'Brackets', price: 100, qty: null },
+            { itemNumber: '155', itemName: 'Chrome Brackets 3/4\'', department: 'Brackets', price: 100, qty: null },
+            { itemNumber: '156', itemName: 'Chrome Pipe 1\'', department: 'Pipe', price: 600, qty: null },
+            { itemNumber: '157', itemName: 'Chrome Pipe 3/4\'', department: 'Pipe', price: 550, qty: null },
+            { itemNumber: '158', itemName: 'Proffessional 250ml', department: 'Glue', price: 250, qty: null },
+            { itemNumber: '159', itemName: 'Proffessional 500ml', department: 'Glue', price: 450, qty: null },
+            { itemNumber: '160', itemName: 'Proffessional 1L', department: 'Glue', price: 800, qty: null },
+            { itemNumber: '161', itemName: 'Chemsal 250ml', department: 'Glue', price: 200, qty: null },
+            { itemNumber: '162', itemName: 'Chemsal 500ml', department: 'Glue', price: 350, qty: null },
+            { itemNumber: '163', itemName: 'Chemsal 1L', department: 'Glue', price: 500, qty: null },
+            { itemNumber: '164', itemName: 'Shower', department: 'Shower', price: 1500, qty: null },
+            { itemNumber: '165', itemName: '1Pct Rubbers', department: 'Rubber', price: 100, qty: null },
+            { itemNumber: '166', itemName: 'Testor Dupro', department: 'Testor', price: 100, qty: null },
+            { itemNumber: '167', itemName: 'KZQ Testor', department: 'Testor', price: 100, qty: null },
+            { itemNumber: '168', itemName: 'Dupro Testor (B)', department: 'Testor', price: 130, qty: null },
+            { itemNumber: '169', itemName: 'FX Plier', department: 'Pliers', price: 300, qty: null },
+            { itemNumber: '170', itemName: 'FX Plier Big', department: 'Pliers', price: 350, qty: null },
+            { itemNumber: '171', itemName: 'Ordinary Pliers', department: 'Pliers', price: 250, qty: null },
+            { itemNumber: '172', itemName: 'Cable Clips', department: '', price: 100, qty: null },
+            { itemNumber: '173', itemName: 'Dead Lock Hanzil', department: '', price: 1800, qty: null },
+            { itemNumber: '174', itemName: 'Dead Lock Moment', department: '', price: 1500, qty: null },
+            { itemNumber: '175', itemName: 'Dead Lock Hanzil Knob', department: '', price: 1600, qty: null },
+            { itemNumber: '176', itemName: 'Dead Lock Moment Knob', department: '', price: 1500, qty: null },
+            { itemNumber: '177', itemName: 'Dead Lock Hanzil (Short)', department: '', price: 1200, qty: null },
+            { itemNumber: '178', itemName: 'Dead Lock Tri-Circle Short', department: '', price: 1500, qty: null },
+            { itemNumber: '179', itemName: 'Dead Lock Union Short', department: '', price: 1500, qty: null },
+            { itemNumber: '180', itemName: '2Kg Crack Plier', department: '', price: 750, qty: null },
+            { itemNumber: '181', itemName: '500gm Dr Fixit', department: '', price: 250, qty: null },
+            { itemNumber: '182', itemName: '1Kg Dr Fixit', department: '', price: 650, qty: null },
+            { itemNumber: '183', itemName: '5ml Gladiator', department: '', price: 850, qty: null },
+            { itemNumber: '184', itemName: '1L Gladiator', department: '', price: 1500, qty: null },
+            { itemNumber: '185', itemName: '1L Conta', department: '', price: 950, qty: null },
+            { itemNumber: '186', itemName: '500ml Conta', department: '', price: 550, qty: null },
+            { itemNumber: '187', itemName: '250ml Conta', department: '', price: 350, qty: null },
+            { itemNumber: '188', itemName: '100ml Conta', department: '', price: 200, qty: null },
+            { itemNumber: '189', itemName: 'Wood screw 2\'', department: '', price: 250, qty: null },
+            { itemNumber: '190', itemName: 'Wood screw 1\'', department: '', price: 200, qty: null },
+            { itemNumber: '191', itemName: 'Wood screw 3\'', department: '', price: 500, qty: null },
+            { itemNumber: '192', itemName: 'Malpha Hinges Hydraulic', department: '', price: 150, qty: null },
+            { itemNumber: '193', itemName: 'Malpha Non Hydraulic', department: '', price: 100, qty: null },
+            { itemNumber: '194', itemName: 'Butterfly Hinge', department: '', price: 350, qty: null },
+            { itemNumber: '195', itemName: 'Castor wheel Black', department: '', price: 300, qty: null },
+            { itemNumber: '196', itemName: 'Castor wheel Black Brake', department: '', price: 350, qty: null },
+            { itemNumber: '197', itemName: 'Castor wheel orange', department: '', price: 250, qty: null },
+            { itemNumber: '198', itemName: 'Castor wheel orange Brakes', department: '', price: 300, qty: null },
+            { itemNumber: '199', itemName: 'Kamba 3ply', department: '', price: 100, qty: null },
+            { itemNumber: '200', itemName: 'Wall Plug 6MM', department: '', price: 200, qty: null },
+            { itemNumber: '201', itemName: 'Wall Plug 8MM', department: '', price: 200, qty: null },
+            { itemNumber: '202', itemName: 'Wall Plug 10MM', department: '', price: 200, qty: null },
+            { itemNumber: '203', itemName: 'Wall Plug 12MM', department: '', price: 250, qty: null },
+            { itemNumber: '204', itemName: 'Spirit Level', department: '', price: 150, qty: null },
+            { itemNumber: '205', itemName: 'Scapel 1/2', department: '', price: 100, qty: null },
+            { itemNumber: '206', itemName: 'Scapel 3/4', department: '', price: 150, qty: null },
+            { itemNumber: '207', itemName: 'Sqaure B', department: '', price: 120, qty: null },
+            { itemNumber: '208', itemName: 'Sqaure S', department: '', price: 100, qty: null },
+            { itemNumber: '209', itemName: 'Door Stopper', department: '', price: 100, qty: null },
+            { itemNumber: '210', itemName: 'Chisel 1/2\'', department: '', price: 250, qty: null },
+            { itemNumber: '211', itemName: 'Chisel 3/4\'', department: '', price: 300, qty: null },
+            { itemNumber: '212', itemName: 'Glass Cutter', department: '', price: 150, qty: null },
+            { itemNumber: '213', itemName: 'Corner Tape', department: '', price: 1200, qty: null },
+            { itemNumber: '214', itemName: 'gypsum screw  1\'\'', department: '', price: 800, qty: null },
+            { itemNumber: '215', itemName: 'mdf screw *50', department: '', price: 350, qty: null },
+            { itemNumber: '216', itemName: 'Steel Nails', department: '', price: 250, qty: null },
+            { itemNumber: '217', itemName: 'Fibre Tape', department: '', price: 450, qty: null },
+            { itemNumber: '218', itemName: 'Spray Paint', department: '', price: 250, qty: null },
+            { itemNumber: '219', itemName: 'Drawer Rails', department: '', price: 380, qty: null },
+            { itemNumber: '220', itemName: 'Tuck Nails', department: '', price: 150, qty: null },
+            { itemNumber: '221', itemName: 'Brushes 1\'\'', department: '', price: 100, qty: null },
+            { itemNumber: '222', itemName: 'Handles', department: '', price: 100, qty: null },
+            { itemNumber: '223', itemName: 'Abroslock', department: '', price: 1100, qty: null },
+            { itemNumber: '224', itemName: 'Boros Lock', department: '', price: 1100, qty: null },
+            { itemNumber: '225', itemName: 'Moment Lock', department: '', price: 1100, qty: null },
+            { itemNumber: '226', itemName: 'Union Lock', department: '', price: 1800, qty: null },
+            { itemNumber: '227', itemName: 'Abby Lock', department: '', price: 1500, qty: null },
+            { itemNumber: '228', itemName: 'Hanzil Lock', department: '', price: 3500, qty: null },
+            { itemNumber: '229', itemName: 'Lincy Lock', department: '', price: 1200, qty: null },
+            { itemNumber: '230', itemName: 'Konji (In) (Out)', department: '', price: 100, qty: null },
+            { itemNumber: '231', itemName: 'Jua Kali Konji (In) (Out)', department: '', price: 100, qty: null },
+            { itemNumber: '232', itemName: 'Ordinary Hinges', department: '', price: 50, qty: null },
+            { itemNumber: '233', itemName: 'Wall Pass', department: '', price: 10, qty: null },
+            { itemNumber: '234', itemName: 'shelf Brackets', department: '', price: 100, qty: null },
+            { itemNumber: '235', itemName: 'PV Foam', department: '', price: 1100, qty: null },
+            { itemNumber: '236', itemName: 'Roller', department: '', price: 350, qty: null },
+            { itemNumber: '237', itemName: 'Sand Paper one roll', department: '', price: 40, qty: null },
+            { itemNumber: '238', itemName: 'Silicon Hightech', department: '', price: 350, qty: null },
+            { itemNumber: '239', itemName: 'Silicon GP', department: '', price: 300, qty: null },
+            { itemNumber: '240', itemName: 'Tower Bolt', department: '', price: 150, qty: null },
+            { itemNumber: '241', itemName: 'Drawer Lock', department: '', price: 100, qty: null },
+            { itemNumber: '242', itemName: 'Glass Cutter', department: '', price: 150, qty: null },
+            { itemNumber: '243', itemName: 'Magnetic Nut Setters', department: '', price: 750, qty: null },
+            { itemNumber: '244', itemName: 'Diamond Cutting Disc Big Size', department: '', price: 850, qty: null },
+            { itemNumber: '245', itemName: 'Diamond Cutting Disc Small Size', department: '', price: 400, qty: null },
+            { itemNumber: '246', itemName: 'Cutting Disc', department: '', price: 850, qty: null },
+            { itemNumber: '247', itemName: 'Dr Fixit', department: '', price: 650, qty: null },
+            { itemNumber: '248', itemName: 'C.P Sink Mixer', department: '', price: 1900, qty: null },
+            { itemNumber: '249', itemName: 'C.P Wall Tap', department: '', price: 950, qty: null },
+            { itemNumber: '250', itemName: 'Long Kneck Wall Tap', department: '', price: 600, qty: null },
+            { itemNumber: '251', itemName: 'Wall Tap with Star Handle', department: '', price: 600, qty: null },
+            { itemNumber: '252', itemName: 'Pillar Tap With Star Handle', department: '', price: 600, qty: null },
+            { itemNumber: '253', itemName: 'Pillar Tap Self Closing', department: '', price: 1300, qty: null },
+            { itemNumber: '254', itemName: 'Pegra Bond 200gms', department: '', price: null, qty: null },
+            { itemNumber: '255', itemName: 'Gate Valve', department: '', price: 300, qty: null },
+            { itemNumber: '256', itemName: 'Water Tap', department: '', price: 650, qty: null },
+            { itemNumber: '257', itemName: 'Hacksaw Frame', department: '', price: 400, qty: null },
+            { itemNumber: '258', itemName: 'Saw 18\'', department: '', price: 300, qty: null },
+            { itemNumber: '259', itemName: 'Saw 16\'', department: '', price: 250, qty: null },
+            { itemNumber: '260', itemName: 'Hacksaw Blade', department: '', price: 100, qty: null },
+            { itemNumber: '261', itemName: 'JK File', department: '', price: 100, qty: null },
+            { itemNumber: '262', itemName: 'Panga', department: '', price: 250, qty: null },
+            { itemNumber: '263', itemName: 'Hummer', department: '', price: 300, qty: null },
+            { itemNumber: '264', itemName: 'Wirebrush', department: '', price: 100, qty: null },
+            { itemNumber: '265', itemName: 'Partex Wiid glue', department: '', price: 800, qty: null },
+            { itemNumber: '266', itemName: 'Curtain Holders', department: '', price: 200, qty: null },
+            { itemNumber: '267', itemName: 'Window Stay', department: '', price: 100, qty: null },
+            { itemNumber: '268', itemName: 'Drawer Knob', department: '', price: 50, qty: null },
+            { itemNumber: '269', itemName: 'Silicon Gvn', department: '', price: 450, qty: null },
+            { itemNumber: '270', itemName: 'Brade', department: '', price: 100, qty: null },
+            { itemNumber: '271', itemName: 'Wood Presevative 1Kg', department: '', price: 3500, qty: null },
+            { itemNumber: '272', itemName: 'Kamba 1000Mtrs', department: '', price: 700, qty: null },
+            { itemNumber: '273', itemName: 'Kamba 500Mtrs', department: '', price: 350, qty: null },
+            { itemNumber: '274', itemName: 'Plastic Ventilation', department: '', price: 130, qty: null },
+            { itemNumber: '275', itemName: 'Wood Presevative 20L', department: '', price: 700, qty: null },
+            { itemNumber: '276', itemName: 'Wood Preservative 5L', department: '', price: 350, qty: null },
+            { itemNumber: '277', itemName: 'Tri-Circle 262', department: '', price: 280, qty: null },
+            { itemNumber: '278', itemName: 'Tri-Circle 263', department: '', price: 350, qty: null },
+            { itemNumber: '279', itemName: 'Tri-Circle 264', department: '', price: 400, qty: null },
+            { itemNumber: '280', itemName: 'Tri-Circle 265', department: '', price: 650, qty: null },
+            { itemNumber: '281', itemName: 'Tri-Circle 266', department: '', price: 900, qty: null },
+            { itemNumber: '282', itemName: 'Tri-Cyclic 262', department: '', price: 100, qty: null },
+            { itemNumber: '283', itemName: 'Tri-Cyclic 263', department: '', price: 150, qty: null },
+            { itemNumber: '284', itemName: 'Tri-Cyclic 264', department: '', price: 200, qty: null },
+            { itemNumber: '285', itemName: 'Tri-Cyclic 265', department: '', price: 250, qty: null },
+            { itemNumber: '286', itemName: 'Tri-Cyclic 266', department: '', price: 350, qty: null },
+            { itemNumber: '287', itemName: 'Cica Padlock 70mm', department: '', price: 800, qty: null },
+            { itemNumber: '288', itemName: 'Cica Padlock 50mm', department: '', price: 650, qty: null },
+            { itemNumber: '289', itemName: 'Cica Padlock 40mm', department: '', price: 450, qty: null },
+            { itemNumber: '290', itemName: 'Stelier 80mm', department: '', price: 650, qty: null },
+            { itemNumber: '291', itemName: 'Stelier 70mm', department: '', price: 600, qty: null },
+            { itemNumber: '292', itemName: 'Stelier 60mm', department: '', price: 500, qty: null },
+            { itemNumber: '293', itemName: 'Stelier 50mm', department: '', price: 350, qty: null },
+            { itemNumber: '294', itemName: 'Stelier  40mm', department: '', price: 300, qty: null },
+            { itemNumber: '295', itemName: 'Rollisen 70mm', department: '', price: 500, qty: null },
+            { itemNumber: '296', itemName: 'Rollisen 60mm', department: '', price: 450, qty: null },
+            { itemNumber: '297', itemName: 'Rollisen 50mm', department: '', price: 350, qty: null },
+            { itemNumber: '298', itemName: 'Rollisen 40mm', department: '', price: 250, qty: null },
+            { itemNumber: '299', itemName: 'Auddy 70mm', department: '', price: 500, qty: null },
+            { itemNumber: '300', itemName: 'Auddy 60mm', department: '', price: 450, qty: null },
+            { itemNumber: '301', itemName: 'Auddy 40mm', department: '', price: 350, qty: null },
+            { itemNumber: '302', itemName: 'Mindy Big', department: '', price: 900, qty: null },
+            { itemNumber: '303', itemName: 'Mindy medium', department: '', price: 650, qty: null },
+            { itemNumber: '304', itemName: 'Mindy Small', department: '', price: 550, qty: null },
+            { itemNumber: '305', itemName: 'Buckler Lock Big', department: '', price: 1000, qty: null },
+            { itemNumber: '306', itemName: 'Buckler Lock Small', department: '', price: 900, qty: null },
+            { itemNumber: '307', itemName: 'Rickdoor 70mm', department: '', price: 650, qty: null },
+            { itemNumber: '308', itemName: 'Rickdoor 55mm', department: '', price: 500, qty: null },
+            { itemNumber: '309', itemName: 'Mocca 70mm', department: '', price: 450, qty: null },
+            { itemNumber: '310', itemName: 'Mocca 50mm', department: '', price: 320, qty: null },
+            { itemNumber: '311', itemName: 'Alarm Lock', department: '', price: 1000, qty: null },
+            { itemNumber: '312', itemName: 'Rubin Lock', department: '', price: 600, qty: null },
+            { itemNumber: '313', itemName: 'Tri-Circle 50mm', department: '', price: 550, qty: null },
+            { itemNumber: '314', itemName: 'Hada Filler', department: '', price: 900, qty: null },
+            { itemNumber: '315', itemName: 'Sahara', department: '', price: 700, qty: null },
+            { itemNumber: '316', itemName: 'Duracoat skim coat', department: '', price: 1350, qty: null },
+            { itemNumber: '317', itemName: 'Drawer locks', department: '', price: 100, qty: null },
+            { itemNumber: '318', itemName: 'Tower bolt 3\'\'', department: '', price: 100, qty: null },
+            { itemNumber: '319', itemName: 'Tower bolt    4\'\'', department: '', price: 130, qty: null },
+            { itemNumber: '320', itemName: 'brushes 2\'\'', department: '', price: 130, qty: null },
+            { itemNumber: '321', itemName: 'Brushes 3\'\'', department: '', price: 150, qty: null },
+            { itemNumber: '322', itemName: 'Brushes 4\'\'', department: '', price: 200, qty: null },
+            { itemNumber: '323', itemName: 'Brushea 5\'\'', department: '', price: 250, qty: null },
+            { itemNumber: '324', itemName: 'Brushes 6\'\'', department: '', price: 300, qty: null },
+            { itemNumber: '325', itemName: 'Steel  nails  2\'\'', department: '', price: null, qty: null },
+            { itemNumber: '326', itemName: 'Steel nails 2.5\'\'', department: '', price: null, qty: null },
+            { itemNumber: '327', itemName: 'Steel nails 3\'\'', department: '', price: null, qty: null },
+            { itemNumber: '328', itemName: 'Steel nails 4\'\'', department: '', price: null, qty: null },
+            { itemNumber: '329', itemName: 'Steel nails 1.5\'\'', department: '', price: null, qty: null },
+            { itemNumber: '330', itemName: 'Steel nails 1\'\'', department: '', price: null, qty: null },
+            { itemNumber: '331', itemName: '', department: '', price: null, qty: null },
+            { itemNumber: '332', itemName: '', department: '', price: null, qty: null },
+            { itemNumber: '333', itemName: '', department: '', price: null, qty: null },
+            { itemNumber: '335', itemName: '', department: '', price: null, qty: null }
+        ];
+
+        // Utility functions
+        function formatPrice(price) {
+            if (price === null || price === undefined || isNaN(price)) return 'N/A';
+            return 'KSh ' + Number(price).toLocaleString();
+        }
+
+        function getStockStatus(qty) {
+            if (qty === null || qty === undefined || qty === 0) return 'out-of-stock';
+            if (qty <= 5) return 'low-stock';
+            return 'in-stock';
+        }
+
+        function getStockText(qty) {
+            if (qty === null || qty === undefined) return 'Out of Stock';
+            if (qty === 0) return 'Out of Stock';
+            if (qty <= 5) return `Low Stock (${qty})`;
+            return `In Stock (${qty})`;
+        }
+
+        // Calculate total value of inventory
+        function calculateTotalValue(items) {
+            return items.reduce((total, item) => {
+                const price = Number(item.price) || 0;
+                const qty = Number(item.qty) || 0;
+                return total + (price * qty);
+            }, 0);
+        }
+
+        // Count unique departments
+        function countDepartments(items) {
+            const departments = new Set();
+            items.forEach(item => {
+                if (item.department && item.department.trim() !== '') {
+                    departments.add(item.department);
+                }
+            });
+            return departments.size;
+        }
+
+        // Render inventory table
+        function renderInventory(items) {
+            const tbody = document.getElementById('inventoryBody');
+            tbody.innerHTML = '';
+            
+            if (items.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            <h3>No items found</h3>
+                            <p>Try adjusting your search terms or filters</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            items.forEach(item => {
+                const row = document.createElement('tr');
+                
+                const stockStatus = getStockStatus(item.qty);
+                const stockText = getStockText(item.qty);
+                
+                row.innerHTML = `
+                    <td>${item.itemNumber || 'N/A'}</td>
+                    <td><span class="item-name">${item.itemName || 'Unnamed Item'}</span></td>
+                    <td><span class="department">${item.department || 'General'}</span></td>
+                    <td><span class="price">${formatPrice(item.price)}</span></td>
+                    <td><span class="qty ${stockStatus}">${stockText}</span></td>
+                    <td class="actions">
+                        <button class="btn btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Update stats
+            document.getElementById('totalItems').textContent = items.length;
+            document.getElementById('totalValue').textContent = formatPrice(calculateTotalValue(items));
+            document.getElementById('totalDepartments').textContent = countDepartments(items);
+        }
+
+        // Filter inventory based on search and filters
+        function filterInventory() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const departmentFilter = document.getElementById('departmentFilter').value;
+            const stockFilter = document.getElementById('stockFilter').value;
+            
+            const filteredItems = inventoryData.filter(item => {
+                // Department filter
+                if (departmentFilter && item.department !== departmentFilter) {
+                    return false;
+                }
+                
+                // Stock status filter
+                if (stockFilter) {
+                    const status = getStockStatus(item.qty);
+                    if (status !== stockFilter) {
+                        return false;
+                    }
+                }
+                
+                // Search text
+                if (searchText) {
+                    const searchableText = `${item.itemNumber} ${item.itemName} ${item.department}`.toLowerCase();
+                    if (!searchableText.includes(searchText)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            renderInventory(filteredItems);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render
+            renderInventory(inventoryData);
+            
+            // Event listeners
+            document.getElementById('searchInput').addEventListener('input', filterInventory);
+            document.getElementById('departmentFilter').addEventListener('change', filterInventory);
+            document.getElementById('stockFilter').addEventListener('change', filterInventory);
+            
+            // Add keyboard shortcut for search
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && e.target.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+            });
+            
+            console.log('Lee Timber Yard inventory system loaded successfully!');
+            console.log(`Total items in inventory: ${inventoryData.length}`);
+        });
+    </script>
+</body>
+</html>

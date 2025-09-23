@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lee Timber Yard — Premium Building Materials & Hardware</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-warehouse"></i></span>
+          <div>
+            <h1>Lee Timber Yard</h1>
+            <p class="tagline">Premium Building Materials & Hardware Solutions</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="contact-line"><i class="fas fa-phone"></i> +254 700 000 000</div>
+        <div class="contact-line"><i class="fas fa-envelope"></i> info@leetimberyard.co.ke</div>
+        <div class="contact-line"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-section">
+      <h2>Inventory Management System</h2>
+      <p>Browse and search through our extensive inventory of building materials</p>
+    </section>
+
+    <section class="search-area card-glass">
+      <div class="controls">
+        <div class="search-wrapper">
+          <input id="searchInput" type="search" placeholder="Search by item name, number, or keyword..." autofocus aria-label="Search inventory">
+          <span class="search-icon"><i class="fas fa-search"></i></span>
+        </div>
+
+        <select id="departmentFilter" aria-label="Filter by department">
+          <option value="">All Categories</option>
+          <!-- Will be populated by JavaScript -->
+        </select>
+
+        <select id="stockFilter" aria-label="Filter by stock status">
+          <option value="">All Stock Status</option>
+          <option value="in-stock">In Stock</option>
+          <option value="low-stock">Low Stock</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+      </div>
+
+      <div id="summary" class="summary">
+        <span class="results-count">Showing <span id="count">0</span> items</span>
+        <span class="total-value">Total Value: <span id="totalValue">KSh 0</span></span>
+        <span class="total-departments">Departments: <span id="departmentCount">0</span></span>
+      </div>
+    </section>
+
+    <div class="table-container">
+      <table id="inventoryTable">
+        <thead>
+          <tr>
+            <th data-sort="item_number">Item # <i class="fas fa-sort"></i></th>
+            <th data-sort="item_name">Item Name <i class="fas fa-sort"></i></th>
+            <th data-sort="department">Department <i class="fas fa-sort"></i></th>
+            <th data-sort="price">Price (KSh) <i class="fas fa-sort"></i></th>
+            <th data-sort="qty">Quantity <i class="fas fa-sort"></i></th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody">
+          <!-- Will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon"><i class="fas fa-check-circle"></i></span>
+          <h3>Quality Assured</h3>
+          <p>All materials meet industry standards</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="fas fa-truck"></i></span>
+          <h3>Fast Delivery</h3>
+          <p>Quick delivery across Nairobi</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="fas fa-tag"></i></span>
+          <h3>Best Prices</h3>
+          <p>Competitive pricing guaranteed</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon"><i class="fas fa-boxes"></i></span>
+          <h3>Large Inventory</h3>
+          <p>Extensive stock always available</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Lee Timber Yard</h4>
+            <p>Your trusted partner for quality building materials and hardware solutions in Kenya.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+            <p><i class="fas fa-envelope"></i> info@leetimberyard.co.ke</p>
+            <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+          </div>
+          <div class="footer-section">
+            <h4>Business Hours</h4>
+            <p>Mon - Fri: 7:00 AM - 6:00 PM</p>
+            <p>Saturday: 7:00 AM - 6:00 PM</p>
+            <p>Sunday: Closed</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Lee Timber Yard. All rights reserved. | daviestheds</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
