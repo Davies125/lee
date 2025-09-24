@@ -1,0 +1,608 @@
+Item Number,Item Name,Department,Selling Price,Quantity
+1,901 PVC,PVC,4500,
+2,902 PVC,PVC,4500,2
+3,903 PVC,PVC,4500,3
+4,904 PVC,PVC,4500,4
+5,904+ PVC,PVC,4500,5
+6,906 PVC,PVC,4500,6
+7,007 PVC,PVC,2500,7
+8,901 Cornices,Cornices,250,8
+9,902 Cornices,Cornices,250,9
+10,903 Cornices,Cornices,250,10
+11,904 Cornices,Cornices,250,11
+12,904+ Cornices,Cornices,250,12
+13,007 Cornices,Cornices,170,13
+14,906 Cornices,Cornices,250,14
+15,Hada Gypsum Board,Gypsum,800,
+16,Blueswan Gypsum Board ,Gypsum,750,15
+17,Channels,Gypsum,150,16
+18,Studs ,Gypsum,150,17
+19,gypsum Cornice,Gypsum,110,18
+20,Fibre Cornice,Gypsum,550,19
+21,gypsum Fibre Cornice,,,
+22,Gypsum Screws,Gypsum,700,20
+23,Fibre Tape,Gypsum,400,21
+24,Corner Tape,Gypsum,1000,22
+25,Gypsum reject,Gypsum,500,23
+26,Marine Board,Boards,2200,24
+27,Block Board,Boards,2700,25
+28,Ply Wood ,Boards,450,26
+29,6 Ply,Boards,1100,27
+30,9 Ply,Boards,1750,28
+31,Laminated Ply,Boards,1400,29
+32,Ceiling board Plain,Boards,1000,30
+33,Ceiling board design,Boards,1000,31
+34,White MDF,Boards,3350,32
+35,White Chipboard,Boards,3200,
+36,Cherry MDF,Boards,3350,33
+37,Cherry Chipboard,Boards,3200,
+38,Beech MDF,Boards,3350,34
+39,Beech Chipboard,Boards,3200,
+40,Coimbra MDF,Boards,3350,35
+41,Coimbra Chipboard,Boards,3200,
+42,Amaya MDF,Boards,3350,36
+43,Amaya Chipboard,Boards,3200,
+44,A. wallnut MDF,Boards,3350,37
+45,A. wallnut Chipboard,Boards,3200,
+46,K 129 MDF,Boards,3350,38
+47,K 129 Chipboard,Boards,3200,
+48,Versatile Oak MDF,Boards,3350,39
+49,Versatile Chipboard,Boards,3200,
+50,Light Grey MDF,Boards,3350,
+51,Light Grey Chipboard,Boards,3200,
+52,Black Grey MDF,Boards,3350,
+53,Black Grey Chipboard,Boards,3200,
+54,Dark Grey MDF,Boards,3350,
+55,Dark Grey Chipboard,Boards,3200,
+56,Royal teak MDF,Boards,3350,
+57,Royal teak Chipboard,Boards,3200,
+58,White oak MDF,Boards,3350,
+59,White oak Chipboard,Boards,3200,
+60,Savina Mat MDF,Boards,3350,
+61,Savina Mat Chipboard,Boards,3200,
+62,Stoney Grey MDF,Boards,3350,
+63,Stoney Grey Chipboard,Boards,3200,
+64,Honey Bee MDF,Boards,3350,
+65,Honey Bee Chipboard,Boards,3200,
+66,White Cherry MDF,Boards,3350,
+67,White Cherry Chipboard,Boards,3200,
+68,Black Cherry MDF,Boards,3350,
+69,Black Cherry Chipboard,Boards,3200,
+70,NC Varnish 1L,,700,
+71,NC Varnish 1/2 L,,400,
+72,Sanding Varnish 4L,,2500,
+73,Sanding Varnish 1L,,750,
+74,Clear Varnish 4L,,2400,
+75,Clear Varnish 1L,,700,
+76,Chupa varnish 1L,,600,
+77,Chupa varnish 1/2L,,300,
+78,4L SG1 supergloss Duracoat,Paint,,
+79,4L SG2 supergloss Duracoat,Paint,,13
+80,4L SG3 supergloss Duracoat,Paint,,3
+81,4L SG4 supergloss Duracoat,Paint,,3
+82,4L SG5 supergloss Duracoat,Paint,,2
+83,4L SG6 supergloss Duracoat,Paint,,6
+84,4L SGYLW supergloss Duracoat,Paint,,6
+85,4L Brilliant white supergloss Duracoat,Paint,,5
+86,4L Gunmetal supergloss Duracoat,Paint,,2
+87,1L SG1 supergloss Duracoat,Paint,,12
+88,1L SG2 supergloss Duracoat,Paint,,7
+89,1L SG3 supergloss Duracoat,Paint,,10
+90,1L SG4 supergloss Duracoat,Paint,,7
+91,1L SG5 supergloss Duracoat,Paint,,10
+92,1L SG6 supergloss Duracoat,Paint,,7
+93,1L SGYLW supergloss Duracoat,Paint,,2
+94,1L Brilliant white supergloss Duracoat,Paint,,16
+95,1L Gunmetal supergloss Duracoat,Paint,,3
+96,1L Mahogany Mist supergloss Duracoat,Paint,,
+97,4L RF BLUE Roof paint Duracoat,Paint,,1
+98,4L RED Floorpaint Duracoat,Paint,,1
+99,4L White Universal Undercoat Duracoat,Paint,,5
+100,1L White Universal Undercoat Duracoat,Paint,,2
+101,5Kg Dr. Fixit Sure Seal,Paint,,15
+102,1Kg Dr. Fixit Sure Seal,Paint,,10
+103,4L VM1 Vinly matt deluxe Duracoat,Paint,2400,4
+104,4L VM2 Vinly matt deluxe Duracoat,Paint,2400,
+105,4L VM3 Vinly matt deluxe Duracoat,Paint,2400,
+106,4L VM4 Vinly matt deluxe Duracoat,Paint,2400,7
+107,4L VM5 Vinly matt deluxe Duracoat,Paint,2400,6
+108,4L Brilliant white Vinly matt deluxe Duracoat,Paint,2400,
+109,4L VMYLW Vinly matt deluxe Duracoat,Paint,2400,
+110,4L VMYOX Vinly matt deluxe Duracoat,Paint,2400,
+111,1L VM1 Vinly matt deluxe Duracoat,Paint,750,9
+112,1L VM2 Vinly matt deluxe Duracoat,Paint,750,4
+113,1L VM3 Vinly matt deluxe Duracoat,Paint,750,15
+114,1L VM4 Vinly matt deluxe Duracoat,Paint,750,8
+115,1L VM5 Vinly matt deluxe Duracoat,Paint,750,4
+116,1L Brilliant white Vinly matt deluxe Duracoat,Paint,750,12
+117,1L VMYLW Vinly matt deluxe Duracoat,Paint,750,7
+118,1L VMYOX Vinly matt deluxe Duracoat,Paint,750,6
+119,4L Universal Undercoat Crown,Paint,,3
+120,4L Wood Primer Crown,Paint,,4
+121,4L wood Master Varnish - Crown,Paint,,11
+122,4L Crown Transeal - Crown,Paint,,19
+123,1L Acrylic Sealer - DuraCoat,Paint,,7
+124,4L Acrylic Sealer - DuraCoat,Paint,,
+125,4L Black Supergloss - Crown,Paint,,5
+126,4L Brilliant white supergloss Crown,Paint,,7
+127,4L Brilliant white supergloss Crown,Paint,,5
+128,1L Clear Varnish wood finish Crown,Paint,700,3
+129,4L Clear Varnish ,Paint,2400,
+130,4L Brilliant White Covermatt Crown,Paint,1100,15
+131,4L Clear High Gloss Woodtech Duracoat,Paint,,
+132,4L Wood Primer White Duracoat,Paint,,4
+133,1L Wood Primer White Duracoat,Paint,,13
+134,4L Clear High Gloss Varnish Duracoat,Paint,,7
+135,800 ML Hardener Duracoat,Paint,,7
+136,4L NC sanding Sealer,Paint,,4
+137,1L NC sanding Sealer,Paint,,3
+138,4L Basco Bermuda Blue,Paint,,3
+139,1L Basco Bermuda Blue,Paint,,6
+140,4L Basco grey oxide primer light,Paint,,5
+141,4L VS1 Vinly Silk Duracoat,Paint,2500,
+142,4L VS2 Vinly Silk Duracoat,Paint,2500,
+143,4L VS3 Vinly Silk Duracoat,Paint,2500,
+144,4L VS4 Vinly Silk Duracoat,Paint,2500,
+145,4L VS5 Vinly Silk Duracoat,Paint,2500,
+146,4L VSYLW Vinly Silk Duracoat,Paint,2500,
+147,4L VSYOX Vinly Silk Duracoat,Paint,2500,
+148,1L VS1 Vinly Silk Duracoat,Paint,800,
+149,1L VS2 Vinly Silk Duracoat,Paint,800,
+150,1L VS3 Vinly Silk Duracoat,Paint,800,
+151,1L VS4 Vinly Silk Duracoat,Paint,800,
+152,1L VS5 Vinly Silk Duracoat,Paint,800,
+153,1L VSYLW Vinly Silk Duracoat,Paint,800,
+154,1L VSYOX Vinly Silk Duracoat,Paint,800,
+155,4L SE1 Silcone Exterior Emulsion Duracoat,Paint,3100,
+156,4L SE2 Silcone Exterior Emulsion Duracoat,Paint,3100,
+157,4L SE3 Silcone Exterior Emulsion Duracoat,Paint,3100,
+158,4L SE4 Silcone Exterior Emulsion Duracoat,Paint,3100,
+159,4L SE5 Silcone Exterior Emulsion Duracoat,Paint,3100,
+160,4L SEYLW Silcone Exterior Emulsion Duracoat,Paint,3100,
+161,4L SEYOX Silcone Exterior Emulsion Duracoat,Paint,3100,
+162,1L SE1 Silcone Exterior Emulsion Duracoat,Paint,950,
+163,1L SE2 Silcone Exterior Emulsion Duracoat,Paint,950,
+164,1L SE3 Silcone Exterior Emulsion Duracoat,Paint,950,
+165,1L SE4 Silcone Exterior Emulsion Duracoat,Paint,950,
+166,1L SE5 Silcone Exterior Emulsion Duracoat,Paint,950,
+167,1L SEYLW Silcone Exterior Emulsion Duracoat,Paint,950,
+168,1L SEYOX Silcone Exterior Emulsion Duracoat,Paint,950,
+169,4L Brilliant White Basco,Paint,,7
+170,4L Cream 30-40 superfast Duracoat,Paint,1050,
+171,4L Brilliant white Superfast Duracoat,Paint,1050,
+172,4L Softwhite Superfast Duracoat,Paint,1050,
+173,1L Brilliant White Basco,Paint,,
+174,1L Cream 30-40 superfast Duracoat,Paint,500,
+175,1L Brilliant white Superfast Duracoat,Paint,500,
+176,1L Softwhite Superfast Duracoat,Paint,500,
+177,Lipping per metre,,15,
+178,Lipping Roll,,1100,
+179,1 Screw Cover,,10,
+180,7.5M Measuring Tape,,250,
+181,500ML Standard Thinner Crystal,paint,,
+182,1L Standard Thinner Crystal,paint,,
+183,5L Standard Thinner Crystal,paint,,
+184,500ML White spirit Crystal,paint,,
+185,1L White spirit Crystal,paint,350,
+186,5L White spirit Crystal,paint,1450,
+187,500ML Mineral turpentine Crystal,paint,,
+188,1L Mineral turpentine Crystal,paint,,
+189,5L Mineral turpentine Crystal,paint,,
+190,500ML Standard Thinner Solai,paint,,
+191,1L Standard Thinner Solai,paint,,
+192,5L Standard Thinner Solai,paint,,
+193,500ML White spirit Solai,paint,,
+194,1L White spirit Solai,paint,350,
+195,5L White spirit Solai,paint,1450,
+196,500ML Mineral turpentine Solai,paint,,
+197,1L Mineral turpentine Solai,paint,,
+198,5L Mineral turpentine Solai,paint,,
+199,500ML Standard Thinner DuraCoat,paint,,
+200,1L Standard Thinner DuraCoat,paint,,
+201,5L Standard Thinner DuraCoat,paint,,
+202,500ML White spirit DuraCoat,paint,,
+203,1L White spirit DuraCoat,paint,350,
+204,5L White spirit DuraCoat,paint,1450,
+205,500ML Mineral turpentine DuraCoat,paint,,
+206,1L Mineral turpentine DuraCoat,paint,,
+207,5L Mineral turpentine DuraCoat,paint,,
+208,500ML Standard Thinner Crown,paint,,
+209,1L Standard Thinner  Crown,paint,,
+210,5L Standard Thinner  Crown,paint,,
+211,500ML White spirit  Crown,paint,,
+212,1L White spirit  Crown,paint,,
+213,5L White spirit  Crown,paint,1450,
+214,500ML Mineral turpentine  Crown,paint,,
+215,1L Mineral turpentine  Crown,paint,,
+216,5L Mineral turpentine  Crown,paint,,
+217,4L Gloss Enamel Gun Metal united,paint,,
+218,4L Gloss Enamel Metal Grey united,paint,,
+219,4L Gloss Enamel White united,paint,,
+220,4L Gloss Enamel Black united,paint,,
+221,1L Gloss Enamel Gun Metal united,paint,,
+222,1L Gloss Enamel Metal Grey united,paint,,
+223,1L Gloss Enamel Black  united,paint,,
+224,1L Gloss Enamel White united,paint,,
+225,4 L Plastic Emulsion White United,paint,,
+226,4 L plastic Emulsion soft white United,paint,,
+227,4 L Plastic Emulsion cream United,paint,,
+228,1 L Plastic Emulsion White  United,paint,,
+229,1 L Plastic Emulsion soft white United,paint,,
+230,1 L Plastic Emulsion Cream  United,paint,,
+231,4L White Covermatt Emulsion unicolor,paint,1100,
+232,1L Synthetic Varnish Solai,paint,,
+233,4L Synthetic Varnish Solai,paint,,
+234,Sand paper Roll P100,,1700,
+235,Sand paper Roll P120,,1700,
+236,Sand paper Roll P80,,1700,
+237,Sand paper Roll P60,,1700,
+238,Sand paper Roll P40,,1700,
+239,Sand Paper per Mtr,,100,
+240,Sand Paper per ft,,30,
+241,1L Clear Vanish Chupa,,,
+242,500ML Clear Vanish Chupa,,,
+243,1L Mahogany Varnish Chupa,,,
+244,500ML Mahogany Varnish Chupa,,,
+245,1L Shellac Varnish Chupa,,,
+246,500ML Shellac Varnish Chupa,,,
+247,1/2L NC Clear Varnish Solai,,,
+248,1L NC Clear Varnish Solai,,,
+249,4L NC Clear Varnish Solai,,,
+250,1/2L Sanding Sealer Varnish Solai,,,
+251,1L Sanding Sealer Varnish Solai,,,
+252,4L Sanding Sealer Varnish Solai,,,
+253,4L Body Filler/ crystal filler,,,2
+254,4L Metal grey crystal,,,4
+255,4L Gun Metal crystal,,,4
+256,4L Metal grey Solai,,,4
+257,"Brush 1"" ",brush,100,
+258,"Brush 2"" ",brush,150,
+259,"Brush 3"" ",brush,200,
+260,"Brush 4"" ",brush,300,
+261,"Brush 5"" ",brush,350,
+262,"Brush 6""",brush,400,
+263,Basin Mixer Tap,tap,,
+264,Door Closer,door,,
+265,"Hose pipe PVC clear 1/2"" x 60ft",hose pipe,,
+266,"Hose pipe thermoplastic 3/4"" x 60ft",hose pipe,,
+267,"Hose pipe green 3/4"" x 30 metres",hose pipe,,
+268,"Hose pipe green 1/2"" x 30 metres",hose pipe,,
+269,mixer taps & valves,tap,,
+270,Basin Mixer Tap,,,
+271,1L Conta ,,1200,
+272,500ml Conta,,550,
+273,250ml Conta ,,350,
+274,100ml Conta,,200,
+275,4L Conta,,3500,
+276,"Drawer Rails 20""",,380,
+277,"Drawer Rails 18""",,380,
+278,"Drawer Rails 16""",,350,
+279,"Drawer Rails 14""",,350,
+280,"Drawer Rails 12""",,300,
+281,"Drawer Rails 10""",,250,
+282,Roller,,250,
+283,TV stand,,750,
+284,Cup Holder,,,
+285,Towel Holder,,,
+286,Wirebrush,,100,
+287,Hacksaw Frame ,,400,
+288,Saw 18',,300,
+289,Saw 16',,250,
+290,Hacksaw Blade,,100,
+291,Panga,,250,
+292,steel plastic,,,
+293,steel,,,
+294,silicon gun,,,
+295,kamba plastic,,,
+296,gas lift,,250,
+297,moment 2 lever mortise lock(toilet lock),,,
+298,Butterfly Hinge,hinge,350,
+299,"Box Hinges 2""",,,
+300,"Box Hinges 4""",,,
+301,Drawer locks,,100,
+302,Tower bolt 3'',,100,
+303,Tower bolt    4'',,130,
+304,"lock bolts 6""",,,
+305,L bracket corner bracket,,50,
+306,hasp & staple,,,
+307,handles,,100,
+308,1 screwdriver Bit,,100,
+309,Tile Spacer 2.5 MM,,,
+310,Aviation Tin Snip,,,
+311,JK File,,100,
+312,"Metal Cutting Disk 4.5""",,,
+313,"Metal Cutting Disk 7""",,,
+314,"Metal Cutting Disk 9""",,,
+315,sanding disk,,,
+316,Cable tie 8 x 400 mm,,,
+317,cable tie small,,,
+318,Cable Clips,,90,
+319,Silicone Adhesive Sealant 85gms,,,
+320,Bovos Door Lock,,,
+321,Sanitary / toilet/ bidet fixing set,,,
+322,Black Window stays,,,68
+323,Window Stays Gold ,,150,80
+324,Window  fastener Gold ,,150,233
+325,20L Brilliant white Superfast Duracoat,paint,4000,27
+326,20L Softwhite Superfast Duracoat,paint,4000,11
+327,20L Cream superfast Duracoat,paint,4000,11
+328,20L Brilliant white Covermatt Crown,paint,4100,33
+329,20L Softwhite Covermatt Crown,paint,4100,5
+330,20L CreamCovermatt Crown,paint,4100,4
+331,30kg Real Rock,paint,4300,84
+332,20kg Smotex White,paint,1300,6
+333,20L VS1 Vinly Silk Duracoat,paint,13500,6
+334,20L VS2 Vinly Silk Duracoat,paint,13500,12
+335,20L VS3 Vinly Silk Duracoat,paint,13500,15
+336,20L VS4 Vinly Silk Duracoat,paint,13500,5
+337,20L VS5 Vinly Silk Duracoat,paint,13500,4
+338,20L VSYLW Vinly Silk Duracoat,paint,13500,0
+339,20L VSYOX Vinly Silk Duracoat,paint,13500,5
+340,20L Brilliant white Vinly Silk Duracoat,paint,13500,6
+341,20L VM1 Vinly matt deluxe Duracoat,paint,12000,11
+342,20L VM2 Vinly matt deluxe Duracoat,paint,12000,5
+343,20L VM3 Vinly matt deluxe Duracoat,paint,12000,5
+344,20L VM4 Vinly matt deluxe Duracoat,paint,12000,2
+345,20L VM5 Vinly matt deluxe Duracoat,paint,12000,4
+346,20L Brilliant white Vinly matt deluxe Duracoat,paint,12000,9
+347,20L VMYLW Vinly matt deluxe Duracoat,paint,12000,0
+348,20L VMYOX Vinly matt deluxe Duracoat,paint,12000,0
+349,20L SE1 Silcone Exterior Emulsion Duracoat,paint,15000,4
+350,20L SE2 Silcone Exterior Emulsion Duracoat,paint,15000,6
+351,20L SE3 Silcone Exterior Emulsion Duracoat,paint,15000,8
+352,20L SE4 Silcone Exterior Emulsion Duracoat,paint,15000,6
+353,20L SE5 Silcone Exterior Emulsion Duracoat,paint,15000,3
+354,20L SEYLW Silcone Exterior Emulsion Duracoat,paint,15000,0
+355,20L SEYOX Silcone Exterior Emulsion Duracoat,paint,15000,5
+356,20L Brilliant White Silcone Exterior Emulsion Duracoat,paint,15000,1
+357,30kg Ruff N Tuff ,paint,4050,24
+358,20L Basco Value ,paint,,3
+359,Tile cutter,,200,
+360,square,,,
+361,Hammer,,300,
+362,250ml Silicone Sealant - acetic Silicone,,,
+363,300ml Silicone Sealant - acetic Cure,,,
+364,300ml Neutral Silicone Sealant,,,
+365,300ml ABC Silicone Sealant,,,
+366,300ml Anti - Fungi Gap Sealant,,,
+367,100M Measuring Tape - Hiayu,,,
+368,Tissue Holder,,,
+369,screw 12 x 2,,10,
+370,screw 12 x 1 1/2,,10,
+371,Tri-Circle 266,,900,
+372,Abroslock,,1100,
+373,Moment Locks,,900,
+374,Union Locks,,1500,
+375,Hanzil Locks,,3500,
+376,GJS lock,,,
+377,Wista lock,,,
+378,Silicone Vitas,,,
+379,Fevicol 1k pur adhesive,,,
+380,Cica Padlock,,,
+381,gas burner,,,1
+382,chalk line reel,,,
+383,push to open,,,
+384,paint scrapper large,,,
+385,paint scrapper small,,,
+386,toilet lock with indicator,,,
+387,spirit level,,,
+388,shelf bracket,,200,
+389,"chisel 1/2""",,,
+390,"chisel 3/4""",,,
+391,Rubber door stopper,,,
+392,Display hook,,,
+393,combination spanner  12,,,5
+394,spanner  16/17,,,
+395,spanner 12/13,,,
+396,multi - bit screwdriver,,,
+397,flathead screwdriver,,,
+398,PDR stain powder,,,
+399,PDR Dog brand stain water,,,
+400,Caster wheel brakes,,,
+401,Caster wheel free,,,
+402,Cabinet knobes,,,
+403,spray paint all colors,,300,
+404,sliding door roller,,,
+405,wall panel,,900,
+406,Gypsum Board - Hada,,850,
+407,Gypsum Board - Blueswan,,750,
+408,Channels,,150,
+409,Studs,,150,
+410,Gypsum Cornice,,110,
+411,Gypsum Cornice fibre,,450,
+412,skimming filler duracoat,,1300,
+413,skimming filler Crown(wallplast),,1300,
+414,Sahara Filler,,600,
+415,Zelco Filler ,,650,
+416,Gyproc filler,,1900,
+417,Adhesive,,500,
+418,Fibre Net,,350,
+419,Corner tape,,1000,
+420,Big Gypsum Screw,,700,
+421,Gypsum Screw small,,350,
+422,gypsum knife,,200,
+423,Channels/studs scicers,,600,
+424,chalk line,,850,
+425,malpha 360 degrees,,550,
+426,malpha hydraulic hinge,,130,
+427,malpha non hydraulic hinge,,100,
+428,"Chrome Brackets 3/4""",,100,
+429,"Chrome Brackets 1""",,100,
+430,chrome cap 1/2 (pair),,200,
+431,chrome cap 3/4 (pair),,150,
+432,crystal Body Filler 1kg,,650,
+433,crystal Body Filler 4.5kg,,2300,
+434,Castor Wheel Brakes,,350,
+435,Castor Wheel free,,300,
+436,Oxford hinges Gold,,200,
+437,Oxford hinges Silver,,200,
+438,P.O (emony cloth) per piece,,30,
+439,1L Ponal,,750,
+440,1/2L Ponal,,400,
+441,1/4L Ponal,,250,
+442,2kg Ponal,,1800,
+443,Steel nails 1'',,250,
+444,Steel nails 1.5'',,250,
+445,Steel  nails  2'',,250,
+446,Steel nails 2.5'',,250,
+447,Steel nails 3'',,250,
+448,Steel nails 4'',,250,
+449,"Tack nails 1""",,150,
+450,"Tack nails 3/4""",,150,
+451,Gutters,,1300,
+452,corners,,410,
+453,End  Cap,,350,
+454,dropper,,450,
+455,Elbow,,300,
+456,connector,,350,
+457,Gutter Dropper,,450,
+458,Kamba 18ply,,,
+459,kamba,,,
+460,Oxford locks,,,
+461,50mm flasher plug S10,,,
+462,flasher plug S8,,,
+463,flasher plug S12,,,
+464,Wall Plug 6MM,,200,
+465,Wall Plug 8MM,,200,
+466,Wall Plug 10MM,,200,
+467,Wall Plug 12MM,,250,
+468,Drilling Screws with washer size 5,,,
+469,Makita Carbon Brush CB 303,,,
+470,Makita Carbon Brush CB 204,,,
+471,Mortillet Rim Lock,,,
+472,sliding window roller,,,
+473,waterproof adhesive marine plus,,,
+474,"flap disk 4.5""",,,
+475,Tangit 1000ml ,,1200,
+476,cutter / utility knife,,,
+477,"masking tape 1""",,,
+478,"masking tape 2""",,,
+479,"masking tape 3/4""",,,
+480,"masking tape 1/2""",,,
+481,7.5mm Metal Drill bit ,,200,8
+482,1/4 Metal Drill bit ,,,18
+483,7mm Metal Drill bit ,,,2
+484,8mm Metal Drill bit ,,,8
+485,10mm Metal Drill bit ,,,1
+486,6mm Metal Drill bit ,,,15
+487,5.5mm Metal Drill bit ,,100,11
+488,4.0mm masonry drill bit,,,4
+489,10.0mm masonry drill bit,,,6
+490,12.0mm masonry drill bit,,200,2
+491,Adhesive glue fevicol 150g,,950,6
+492,M6 fix bolt,,,
+493,M8 fix bolt,,,
+494,M10 fix bolt,,,
+495,M12 fix bolt,,,
+496,M16 fix bolt,,,
+497,magnetic catch,,100,
+498,2ply polythene rope,,,
+499,trowel,,,3
+500,waterproof sandpaper / abrasive paper 1 @,,30,
+501,flush handle,,,
+502,curtain rings 1@,,10,
+503,door lock plate,,,
+504,washers,,,
+505,Downpipe,,1200,
+506,Gutter Joiner,,,
+507,Outside Corner,,410,
+508,Inside Corner,,410,
+509,Hangers,,90,
+510,Director,,,
+511,Drop Outlet,,,
+512,Mahogany Panel Door,,3200,
+513,Laminated Panel Door,,3200,
+514,Button Door,,1800,
+515,Tee Door,,2600,
+516,Cyprus Solid Door,,"11,000",
+517,Mahogany Spolid Door,,"20,000",
+518,Curtain rods 2m,,,
+519,Curtain rods 3m,,,
+520,Curtain rods 1m,,,
+521,double towel holder,,,
+522,towel holder,,,
+523,toothbrush holder ,,900,
+524,double toothbrush holder,,1100,
+525,Fiber measuring tape 100m/330ft,,,
+526,"tv mount 14""-43""",,700,
+527,ring towel holder,,450,
+528,"tv mount 26"" - 63""",,,
+529,"tv mount 26"" - 65""",,,
+530,curtain flower trophy,,,
+531,curtain net flower,,,
+532,curtain caps,,,
+533,curtain brackets,,,
+534,mdf screw 4 x 50,,,
+535,mdf screw 4 x 40,,,
+536,"mdf screw 4 x  35 - 1.5""",,,
+537,mdf screw 4 x 30,,,
+538,Groit white,,,
+539,Groit Black,,,
+540,Groit grey,,,
+541,Groit Cream,,,
+542,Groit Brown,,,
+543,Mindy padlock 60mm,,,5
+544,Mindy padlock 50mm,,,4
+545,Mindy padlock 40mm,,,6
+546,Horse pipe 1/2 x 60,,,3
+547,Horse pipe 3/4 x 60,,,2
+548,Horse pipe 1/2 x 120,,,1
+549,trowel small,,,12
+550,tangit 500ml,,,
+551,tangit 250ml,,,
+552,"self tapping screws 6 x 1""",,,
+553,"self tapping screws 4 x 40  1.5""",,,
+554,Blue essential mdf screws,,,
+555,"concrete nail 1""",,,
+556,"concrete nail 1.5""",,,
+557,"concrete nail 2""",,,
+558,"concrete nail 2.5""",,,
+559,"concrete nail 3""",,,
+560,"concrete nail 3.5""",,,
+561,"concrete nail 4""",,,
+562,"door tower bolts 3"" moment",,,
+563,"door tower bolts 2"" moment",,,
+564,"door tower bolts 4"" moment",,,
+565,construction foam dura 750ml,,,
+566,"wood screw 2"" x 8 ",,,
+567,TCT wood Hole Saw 35mm,,,
+568,"9"" Diamond Cutting Blade",,950,
+569,"Diamond Cutting Blade  wiseman 4-1/2""",,500,
+570,"Diamond Cutting Blade DEWALT 4-1/2""",,400,
+571,"Diamond Cutting Blade Dewalt 7"" DX3881",,750,
+572,"Diamond Cutting Blade 7""",,750,
+573,"9"" sali circular saw blade",,950,
+574,,,,
+575,,,,
+576,,,,
+577,,,,
+578,,,,
+579,,,,
+580,,,,
+581,,,,
+582,,,,
+583,,,,
+584,,,,
+585,,,,
+586,,,,
+587,,,,
+588,,,,
+589,,,,
+590,,,,
+591,,,,
+592,,,,
+593,,,,
+594,,,,
+595,,,,
+596,,,,
+597,,,,
+598,,,,
+599,,,,
+600,,,,
+601,,,,
+602,,,,
+603,,,,
+604,,,,
+605,,,,
+606,,,,
+607,,,,
