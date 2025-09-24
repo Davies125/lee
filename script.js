@@ -65,20 +65,28 @@ class InventoryManager {
         const result = [];
         let current = '';
         let inQuotes = false;
-        
-        for (let i = 0; i < line.length; i++) {
+        let i = 0;
+
+        while (i < line.length) {
             const char = line[i];
-            
+
             if (char === '"') {
-                inQuotes = !inQuotes;
+                // Check for escaped quote ("")
+                if (inQuotes && line[i + 1] === '"') {
+                    current += '"';
+                    i++; // Skip the next quote
+                } else {
+                    inQuotes = !inQuotes;
+                }
             } else if (char === ',' && !inQuotes) {
                 result.push(current.trim());
                 current = '';
             } else {
                 current += char;
             }
+            i++;
         }
-        
+
         result.push(current.trim());
         return result;
     }
@@ -228,7 +236,7 @@ class InventoryManager {
         
         this.filteredData = this.inventoryData.filter(item => {
             const matchesSearch = (item.itemName && item.itemName.toLowerCase().includes(searchQuery)) ||
-                                  (item.itemNumber && String(item.itemNumber).toLowerCase().includes(searchQuery));
+                                 (item.itemNumber && String(item.itemNumber).toLowerCase().includes(searchQuery));
             
             const matchesDepartment = !departmentFilter || (item.department && item.department.toLowerCase() === departmentFilter);
             
@@ -260,7 +268,7 @@ class InventoryManager {
             modalTitle.textContent = 'Edit Item';
             itemId.value = item.itemNumber;
             itemNumberInput.value = item.itemNumber;
-            itemNumberInput.disabled = true; // Prevent editing the item number
+            itemNumberInput.disabled = true;
             itemNameInput.value = item.itemName;
             departmentInput.value = item.department;
             priceInput.value = item.price;
@@ -296,14 +304,12 @@ class InventoryManager {
         };
 
         if (itemId) {
-            // Edit existing item
             const index = this.inventoryData.findIndex(item => item.itemNumber === itemId);
             if (index !== -1) {
                 this.inventoryData[index] = newItem;
                 this.filterInventory();
             }
         } else {
-            // Add new item
             const itemExists = this.inventoryData.some(item => item.itemNumber === itemNumber);
             if (itemExists) {
                 alert('An item with this number already exists. Please use a unique number.');
@@ -326,7 +332,7 @@ class InventoryManager {
         const header = ["Item Number", "Item Name", "Department", "Selling Price", "Quantity"];
         const rows = this.inventoryData.map(item => [
             item.itemNumber,
-            `"${item.itemName.replace(/"/g, '""')}"`, // Handle commas and quotes in item names
+            `"${item.itemName.replace(/"/g, '""')}"`,
             item.department,
             item.price,
             item.qty
